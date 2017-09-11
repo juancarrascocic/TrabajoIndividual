@@ -42,9 +42,9 @@ namespace formulario.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Plantilla> Plantillas { get; set; }
+        public DbSet<Semaforo> Semaforos { get; set; }
 
-        public static ApplicationDbContext CreatePlantillasDB()
+        public static ApplicationDbContext CreateSemaforosDB()
         {
             return new ApplicationDbContext();
         }

@@ -1,25 +1,25 @@
 <template>
-	<div class="componenteSemaforosContainer">
+	<div class="componenteSemaforoContainer">
 		<div class="upperBar">
-			<p class="windowCaption">Semáforos</p>
+			<p class="windowCaption">Calles</p>
 			<i class="fa fa-window-minimize buttonMinimize" aria-hidden="true" ></i>
 			<i class="fa fa-window-maximize buttonMaximize" aria-hidden="true"></i>
 			<i class="fa fa-times buttonClose" aria-hidden="true" v-on:click="closeTab"></i>
 		</div>
 		<div class="windowContent">
-			<h1>SEMAFOROS</h1>
+		<semaforosMaster></semaforosMaster>
 		</div>
-	</div>
+	</div>	
 </template>
 
 
 
 <script>
 	import constantes from './constants.js'
-
+	import semaforosMaster from './semaforosMaster.vue'
 	export default{
 		components:{
-
+			semaforosMaster
 
 		},
 		data (){
@@ -39,21 +39,19 @@
 </script>
 
 <style>
-	.componenteSemaforosContainer{
-		background-color: green;
+	.componenteSemaforoContainer{
+		background-color: white;
 		width: 100%;
-		height: auto;
-		max-height: 650px;
-	}
+			}
 	.windowContent{
 		margin-top: 25px;
-		max-height: inherit;
 		overflow: auto;
+		height: 97%;
 	}
 	.upperBar{
-		height: 25px;
-		width: 100%;
+		height: 3%;
 		position: fixed;
+		width: 100%;
 		background-color: red;
 	}
 	.buttonClose{

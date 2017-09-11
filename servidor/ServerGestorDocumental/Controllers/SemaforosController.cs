@@ -17,26 +17,26 @@ namespace formulario.Controllers
 {
     [EnableCors(origins: "http://localhost:8080, http://localhost:8081, http://localhost:3000", headers: "*", methods: "*")]
 
-    public class PlantillasController : ApiController
+    public class SemaforosController : ApiController
     {
-        private IPlantillasService plantillasService;
+        private ISemaforosService semaforosService;
 
-        public PlantillasController(IPlantillasService _plantillasService)
+        public SemaforosController(ISemaforosService _semaforosService)
         {
-            this.plantillasService = _plantillasService;
+            this.semaforosService = _semaforosService;
         }
 
-        // GET: api/Plantillas
-        public IQueryable<Plantilla> GetPlantillas()
+        // GET: api/Semaforos
+        public IQueryable<Semaforo> GetPlantillas()
         {
-            return plantillasService.Get();
+            return semaforosService.Get();
         }
 
-        // GET: api/Plantillas/5
-        [ResponseType(typeof(Plantilla))]
+        // GET: api/Semaforos/5
+        [ResponseType(typeof(Semaforo))]
         public IHttpActionResult GetPlantilla(long id)
         {
-            Plantilla plantilla = plantillasService.Get(id);
+            Semaforo plantilla = semaforosService.Get(id);
             if (plantilla == null)
             {
                 return NotFound();
@@ -45,23 +45,23 @@ namespace formulario.Controllers
             return Ok(plantilla);
         }
 
-        // PUT: api/Plantillas/5
+        // PUT: api/Semaforos/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPlantilla(long id, Plantilla plantilla)
+        public IHttpActionResult PutPlantilla(long id, Semaforo semaforo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != plantilla.Id)
+            if (id != semaforo.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                plantillasService.Put(plantilla);
+                semaforosService.Put(semaforo);
             }
             catch (NoEncontradoException)
             {
@@ -71,35 +71,35 @@ namespace formulario.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Plantillas
-        [ResponseType(typeof(Plantilla))]
-        public IHttpActionResult PostPlantilla(Plantilla plantilla)
+        // POST: api/Semaforos
+        [ResponseType(typeof(Semaforo))]
+        public IHttpActionResult PostPlantilla(Semaforo semaforo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            plantilla = plantillasService.Create(plantilla);
+            semaforo = semaforosService.Create(semaforo);
 
-            return CreatedAtRoute("DefaultApi", new { id = plantilla.Id }, plantilla);
+            return CreatedAtRoute("DefaultApi", new { id = semaforo.Id }, semaforo);
         }
 
-        // DELETE: api/Plantillas/5
-        [ResponseType(typeof(Plantilla))]
+        // DELETE: api/Semaforos/5
+        [ResponseType(typeof(Semaforo))]
         public IHttpActionResult DeletePlantilla(long id)
         {
-            Plantilla plantilla;
+            Semaforo semaforo;
             try
             {
-                plantilla = plantillasService.Delete(id);
+                semaforo = semaforosService.Delete(id);
             }
             catch (NoEncontradoException)
             {
                 return NotFound();
             }
 
-            return Ok(plantilla);
+            return Ok(semaforo);
         }
     }
 }

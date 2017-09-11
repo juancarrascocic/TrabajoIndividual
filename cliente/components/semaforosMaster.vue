@@ -1,15 +1,15 @@
 <template>
-	<div id="documentosMaster">
+	<div id="semaforosMaster">
 
 		<table class="table">
 			<table class="table table-hover" role="tablist">
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nombre</th>
-						<th>Coordenada X</th>
-						<th>Coordenada Y</th>
-						<th>Circulable</th>
+						<th>Calle</th>
+						<th>Tiempo verde</th>
+						<th>Tiempo rojo</th>
+						<th>Paso de peatones</th>
 						<th> <i class="fa fa-user-plus" aria-hidden="true" v-on:click="getNewDetail()"></i> </a></th>
 					</tr>
 				</thead>			
@@ -18,11 +18,10 @@
 
 					<tr v-on:click="renderDetail(item.Id)">
 						<th scope="row" v-model='index'>{{index+1}}</th>
-						<td>{{item.Nombre}}</td>
-						<td>{{item.CoordenadaX}}</td>
-						<td>{{item.CoordenadaY}}</td>
-						<td><input disabled ="true" type="checkbox" name="vehicle"  v-model="item.Circulable"></td>
-
+						<td>{{item.Calle}}</td>
+						<td>{{item.TiempoVerde}}</td>
+						<td>{{item.TiempoRojo}}</td>
+						<td><input disabled ="true" type="checkbox" name="vehicle"  v-model="item.PasoPeatones" value="Bike"></td>
 
 					</tr>
 					<div id="detail-tr" v-if="item.Id == elegido">
@@ -44,16 +43,16 @@
 </template>
 <script type="text/javascript">
 	import constantes from './constants.js';
-	import detail from './callesDetail.vue'
+	import detail from './semaforosDetail.vue'
 	export default{
-		name: "Calle",
+		name: "Semaforo",
 		components:{
 			detail,
 		},
 		data (){
 			return{
 				lista: [],
-				menuChoice:"Calle",
+				menuChoice:"Semaforos",
 				state: "",
 				elegido : "",
 

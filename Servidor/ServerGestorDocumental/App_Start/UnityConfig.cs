@@ -31,10 +31,10 @@ namespace formulario
                 new InterceptionBehavior<DBInterceptor>());
             container.RegisterType<IPerfilesUsuariosRepository, PerfilesUsuariosRepository>();
 
-            container.RegisterType<IPlantillasService, PlantillasService>(
+            container.RegisterType<ISemaforosService, SemaforosService>(
                 new Interceptor<InterfaceInterceptor>(),
                 new InterceptionBehavior<DBInterceptor>());
-            container.RegisterType<IPlantillasRepository, PlantillasRepository>();
+            container.RegisterType<ISemaforosRepository, SemaforosRepository>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

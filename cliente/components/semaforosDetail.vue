@@ -5,7 +5,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Detalle: Calles</h4>
+						<h4 class="modal-title">Detalle: Semáforo</h4>
 						<button type="button" class="close" data-dismiss="modal" v-on:click= "buttonCancelar" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -14,40 +14,32 @@
 							<center>
 								<div class="form-group">
 									<button :disabled="this.isEditable" id="enableEditButton" class="btn btn-primary" v-on:click="buttonEnableEdit">Modificar</button>
-									<button  id="cancelarButton" class="btn btn-primary" v-on:click="buttonCancelar">Cancelar</button>
+									<button  id="cancelarButton" class="btn btn-default" v-on:click="buttonCancelar">Cancelar</button>
 
 								</div>
 							</center>
 							<div class="form-group">
-								<label for="Nombre">Nombre:</label>
-								<input :disabled="!isEditable" class="form-control" v-model="calle.Nombre" type="text" id="NombreInput" placeholder="Nombre"></input>
+								<label for="Nombre">Calle:</label>
+								<input :disabled="!isEditable" class="form-control" v-model="semaforo.Calle" type="text" id="NombreInput" placeholder="Nombre"></input>
 							</div>
 							<div class="form-group">
-								<label>Coordenada X:</label>
-								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaX" id="CoorXInput" placeholder=""></input>
+								<label>Tiempo verde:</label>
+								<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoVerde" id="CoorXInput" placeholder=""></input>
 							</div>
 							<div class="form-group row">
 								<div class="col">
-									<label>Coordenada Y:</label>
-
-									<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaY" id="CoorYInput" ></input>
+									<label>Tiempo rojo:</label>
+									<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoRojo" id="CoorYInput" ></input>
 
 								</div>
 							</div>
 							<div class="checkbox">
-								<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="calle.Circulable" id="circulableInput" >Circulable</label>
-							</div>
-
-							<div class="form-group row" v-if="calle.Circulable">
-								<label>Número de carriles:</label>
-								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.NumeroCarriles" id="CarrilesInput" placeholder=""></input>
-								<label>Accidentes mensuales:</label>
-								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.AccidentesMensuales" id="AccidentesInput" placeholder=""></input>
+								<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="semaforo.PasoPeatones" id="circulableInput" >Paso de peatones</label>
 							</div>
 							<center>
 								<div class="form-group">
-									<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-primary" v-on:click="buttonAccept">Aceptar</button>
-									<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-primary" v-on:click="buttonBorrar">Borrar</button>
+									<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-success" v-on:click="buttonAccept">Aceptar</button>
+									<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-danger" v-on:click="buttonBorrar">Borrar</button>
 								</div>
 							</center>
 
@@ -72,12 +64,12 @@
 		},
 		data (){
 			return{
-				calle:{
+				semaforo:{
 				},
-				previousCalle:{
+				previousSemaforo:{
 				},
 				isEditable:false,
-				menuChoice : "Calle",
+				menuChoice : "Semaforos",
 				estaVacio : false
 
 			}
@@ -92,16 +84,16 @@
 					return  true; 
 				}
 				else if(this.state == constantes.STATE_NEW){
-					/*if(this.calle.Nombre===this.previousCalle.Nombre){
+					/*if(this.semaforo.Nombre===this.previousDocument.Nombre){
 						return  true; 
 					}
-					else if(this.calle.Autor===""){
+					else if(this.semaforo.Autor===""){
 						return true;
 					}
-					else if(this.calle.Tipo === "" ){
+					else if(this.semaforo.Tipo === "" ){
 						return true;
 					} 
-					else if(this.calle.Tamanio === ""){
+					else if(this.semaforo.Tamanio === ""){
 						return  true; 
 					}
 					else{
@@ -110,27 +102,19 @@
 					return false;
 				}
 				else if(this.state == constantes.STATE_UPDATE){
-					if(this.calle.Nombre != this.previousCalle.Nombre){
+					if(this.semaforo.Calle != this.previousSemaforo.Calle){
 						return false;
 					}
-					else if(this.calle.CoordenadaX != this.previousCalle.CoordenadaX){
+					else if(this.semaforo.TiempoVerde != this.previousSemaforo.TiempoVerde){
 						return false;
 					}
-					else if(this.calle.CoordenadaY != this.previousCalle.CoordenadaY){
+					else if(this.semaforo.TiempoRojo != this.previousSemaforo.TiempoRojo){
 						return false;
 					}
-					else if(this.calle.Circulable != this.previousCalle.Circulable){
+					else if(this.semaforo.PasoPeatones != this.previousSemaforo.PasoPeatones){
 						return false;
 					}
-					if(this.calle.Circulable){
-						if(this.calle.NumeroCarriles != this.previousCalle.NumeroCarriles){
-							return false;
-						}
-						else if(this.calle.Accidentes != this.previousCalle.Accidentes){
-							return false;
-						}
-					}
-					return true;
+					else{return true;}
 				}
 			},
 			computeDeleteButton: function(){
@@ -146,7 +130,7 @@
 		methods:{
 			buttonEnableEdit: function(){
 				this.isEditable = !this.isEditable;
-				this.previousCalle = $.extend({}, this.calle)
+				this.previousSemaforo = $.extend({}, this.semaforo)
 			},
 			buttonBorrar: function(){
 				if(confirm("¿Está seguro de que quiere borrar?")){
@@ -172,23 +156,15 @@
 
 				if(this.state == constantes.STATE_NEW){
 					let errores = "";
-					if(this.calle.Nombre===""){
-						errores+="El nombre está vacío. \n";
+					if(this.semaforo.Calle===""){
+						errores+="El valor de Calle está vacío. \n";
 					}
-					if(this.calle.CoordenadaX===""){
-						errores+="El valor de la coordenada X está vacío. \n";
+					if(this.semaforo.TiempoVerde===""){
+						errores+="El valor de Tiempo verde está vacío. \n";
 					}
-					if(this.calle.CoordenadaY === "")
+					if(this.semaforo.TiempoRojo === "")
 					{
-						errores+="El valor de la coordenada Y está vacío. \n";
-					}
-					if(this.calle.Circulable){
-						if(this.calle.NumeroCarriles === 0){
-							errores+="El valor del número de carriles no es correcto. \n";	
-						} 
-						if(this.calle.Accidentes === 0){
-							errores+="El valor de Accidentes mensuales es 0. \n";
-						}
+						errores+="El valor de Tiempo rojo está vacío. \n";
 					}
 					if(errores != ""){
 						alert("Hay campos no rellenados. No se puede crear el objeto:\n" + errores);
@@ -196,7 +172,7 @@
 					else{
 						$.ajax({url:constantes.BASE_URL + this.menuChoice,
 							method:"POST",
-							data: this.calle})	
+							data: this.semaforo})	
 						.done(this.afterPostHandler)
 						.fail(function(){
 							alert("Fallo en la creacion del elemento");
@@ -210,7 +186,7 @@
 
 					$.ajax({url:constantes.BASE_URL + this.menuChoice + "/" + this.currentId,
 						method:"PUT",
-						data: this.calle})
+						data: this.semaforo})
 					.done(this.putSubmitData)
 				}
 			},
@@ -223,7 +199,7 @@
 			},
 			putSubmitData(){
 				alert("Elemento modificado");
-				this.previousCalle = $.extend({}, this.calle);
+				this.previousSemaforo = $.extend({}, this.semaforo);
 				this.$emit('forceUpdate', true);
 
 			}, 	
@@ -239,21 +215,20 @@
 			},
 			makeEmptyData(){
 				if(!this.estaVacio){
-					this.calle = {};
+					this.semaforo = {};
 					this.currentId = "";
-					this.calle.Nombre = "";
-					this.calle.CoordenadaX = "";
-					this.calle.CoordenadaY = "";
-					this.calle.Circulable = false;
-					this.calle.NumeroCarriles = 0;
-					this.calle.Accidentes = 0;
+					this.semaforo.Calle = "";
+					this.semaforo.TiempoVerde = "";
+					this.semaforo.TiempoRojo = "";
+					this.semaforo.PasoPeatones = false;
 
-					this.previousCalle = $.extend({}, this.calle)
+
+					this.previousSemaforo = $.extend({}, this.semaforo);
 				}
 			},
 			submitGetRequest(datos){
 				this.currentId = datos.Id;
-				this.calle = datos; 	
+				this.semaforo = datos; 	
 			},
 			/*parseTipo: function(array){
 				var _this = this;
