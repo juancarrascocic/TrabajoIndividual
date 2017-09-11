@@ -13,6 +13,10 @@
 				</div>
 			</div>
 			<div class="taskContainer">
+				<div class="minimizeAllButton" v-on:click="minimizeAll">
+					<i class="fa fa-home" aria-hidden="true"></i>
+				</div>
+				<!-- TODO Puedo poner un boton de info en plan de versiom autor, etc-->
 			</div>
 		</div>
 	</div>
@@ -52,6 +56,9 @@
 			changeTopWindow:function(nombrePestaña){
 				this.$emit('changeTopWindow', nombrePestaña);
 
+			},
+			minimizeAll: function(){
+				this.$emit('minimizeAll');
 			}
 		}
 	}
@@ -59,12 +66,22 @@
 
 <style>
 	.barContainer{
-		
 		width: 100%;
 		overflow: hidden;
 		left: 0;
 		height: 35px;
-		background-color:  #0062EA ;
+		background-color:  #0062EA;
+	}
+	.minimizeAllButton{
+		bottom: 0;
+		color:white;
+		text-align: center;
+		right: 0;
+		position: absolute;
+		height: 35px;
+		border: solid;
+		border-color:white;
+		width:35px;
 	}
 	.mainContainer{
 		position:fixed; 
@@ -118,11 +135,19 @@
         .tabContainer{
         	left:100px;
         	position: absolute;
+        	/*Para evitar que sea seleccionable el texto*/
+        	-webkit-touch-callout: none; /* iOS Safari */
+        	-webkit-user-select: none; /* Safari */
+        	-khtml-user-select: none; /* Konqueror HTML */
+        	-moz-user-select: none; /* Firefox */
+        	-ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+            supported by Chrome and Opera */
         }
 
         .taskContainer{
         	background-color: red;
-        	width: 200px;
+        	width: 35px;
         	height: 100%;
         	right: 0;
         	bottom: 0;

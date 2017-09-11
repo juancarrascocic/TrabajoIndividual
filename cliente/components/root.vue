@@ -1,8 +1,11 @@
 <template>
-<div class="rootContainer">
-<taskBar @changeTopWindow = "changeTopWindow" :pestañasAbiertas="pestañasAbiertas"></taskBar>
-<component @closeTab="closeTab" v-for="item in pestañasAbiertas" :is="item" class="tabWindow" :class="changeTopWindowClass(item)"></component>
-</div>
+	<div class="rootContainer">
+		<taskBar @minimizeAll ="minimizeAll" @changeTopWindow = "changeTopWindow" :pestañasAbiertas="pestañasAbiertas"></taskBar>
+		<img src="https://images.vexels.com/media/users/3/127711/isolated/preview/384e0b3361d99d9c370b4037115324b9-flat-vintage-car-icon-by-vexels.png"></img>
+		<component v-show="!allMinimized" @closeTab="closeTab" v-for="item in pestañasAbiertas" :is="item" class="tabWindow" :class="changeTopWindowClass(item)"></component>
+
+		
+	</div>
 </template>
 
 
@@ -24,6 +27,7 @@
 			return{
 				pestañasAbiertas:[],
 				currentWindow:"",
+				allMinimized : false,	
 			}
 		},
 		computed:{
@@ -37,6 +41,7 @@
 			},
 			changeTopWindow:function(windowName){
 				this.currentWindow = windowName;
+				this.allMinimized = false;
 			},
 			changeTopWindowClass: function(window){
 				if(this.currentWindow == window){
@@ -45,8 +50,10 @@
 				else{
 					return "notCurrentWindow";
 				}
+			},	
+			minimizeAll: function(){
+				this.allMinimized = true;
 			}
-
 		}
 	}
 </script>
@@ -54,6 +61,7 @@
 <style>
 	.rootContainer{
 		width: 100%;
+		overflow: hidden;
 	}
 	.tabWindow{
 		top:0;
@@ -66,5 +74,12 @@
 	.notCurrentWindow{
 		z-index: 100;
 		top:0;
+	}
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+	.bodyClass{
+		overflow: hidden;
 	}
 </style>

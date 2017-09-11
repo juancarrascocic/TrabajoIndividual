@@ -21,6 +21,7 @@ module.exports = {
           // attribute to be loaded with coffee-loader
           loaders: {
             js: 'babel-loader',
+            ul:'url-loader',
 
           },
         }
