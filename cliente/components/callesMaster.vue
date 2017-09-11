@@ -1,5 +1,6 @@
 <template>
 	<div id="documentosMaster">
+
 		<table class="table">
 			<table class="table table-hover" role="tablist">
 				<thead>
@@ -12,32 +13,32 @@
 						<th> <i class="fa fa-user-plus" aria-hidden="true" v-on:click="getNewDetail()"></i> </a></th>
 					</tr>
 				</thead>			
-				<tr  v-if="computeShowNewDetail">
-					<td colspan="6">
-						<detail @cancelDetail ="removeDetail" @forceUpdate = "forceUpdate" :currentId = "elegido" :state ="state" role="tabpanel" class="float-right"> </detail>
-					</td>
-				</tr>
+				
 				<tbody @click="" v-for="(item, index) in lista">
 
 					<tr v-on:click="renderDetail(item.Id)">
 						<th scope="row" v-model='index'>{{index+1}}</th>
 						<td>{{item.Nombre}}</td>
 						<td>{{item.CoordenadaX}}</td>
-						<td>{{item.CoordenadY}}</td>
+						<td>{{item.CoordenadaY}}</td>
 						<td>{{item.Circulable}}</td>
 
 					</tr>
-					<tr id="detail-tr" v-if="item.Id == elegido">
-						<td colspan="6">
+					<div id="detail-tr" v-if="item.Id == elegido">
+						<div colspan="6">
 							<detail @makeGet= "recargarMaster" @forceUpdate = "forceUpdate" @cancelDetail = "removeDetail" :currentId = "elegido" :state = "state" role="tabpanel" class="float-right"> </detail>
-						</td>
-					</tr>
+						</div>
+					</div>
 					
 				</tbody>
 
 			</table>
 			
 		</table>
+
+		<div  v-if="computeShowNewDetail">
+			<detail @cancelDetail ="removeDetail" @forceUpdate = "forceUpdate" :currentId = "elegido" :state ="state" role="tabpanel" class="float-right"> </detail>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">

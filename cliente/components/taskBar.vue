@@ -9,12 +9,12 @@
 			<button class="startButton" v-on:click="this.hoverMenu"><i class="fa fa-bars" aria-hidden="true" ></i>  START</button>
 			<div class="tabContainer">
 				<div class="pestanya" v-for="item in pestañasAbiertas" v-on:click="changeTopWindow(item)">
-					<p>{{item}}</p>
+					<p class="textoPestanya">{{item}}</p>
 				</div>
 			</div>
 			<div class="taskContainer">
 				<div class="minimizeAllButton" v-on:click="minimizeAll">
-					<i class="fa fa-home" aria-hidden="true"></i>
+					<i class="fa fa-home centerButton" aria-hidden="true"></i>
 				</div>
 				<!-- TODO Puedo poner un boton de info en plan de versiom autor, etc-->
 			</div>
@@ -69,19 +69,22 @@
 		width: 100%;
 		overflow: hidden;
 		left: 0;
-		height: 35px;
+		height:100%;
 		background-color:  #0062EA;
+	}
+	.centerButton{
+		vertical-align: middle;
 	}
 	.minimizeAllButton{
 		bottom: 0;
 		color:white;
 		text-align: center;
 		right: 0;
+		width:100%;
+		height:100%;
 		position: absolute;
-		height: 35px;
 		border: solid;
 		border-color:white;
-		width:35px;
 	}
 	.mainContainer{
 		position:fixed; 
@@ -89,6 +92,10 @@
 		width: 100%;
 		left:0;
 		z-index: 100000;
+	}
+	.textoPestanya{
+		vertical-align: middle;
+		font-size: 20px;
 	}
 	.startButton{
 		position:absolute; 
@@ -99,7 +106,7 @@
 	}
 	.menuStart{
 		position: absolute;
-		bottom:35px;
+		bottom:100%;
 		left:0;
 		width: 100px;
 	}
@@ -125,8 +132,9 @@
         .pestanya{
         	width: 150px;
         	background-color: grey;
-        	height: 35px;
+        	height: 100%;
         	display: inline-block;
+        	vertical-align: middle;
         	bottom: 0;
         	border: solid;
         	text-align: center;
@@ -147,7 +155,7 @@
 
         .taskContainer{
         	background-color: red;
-        	width: 35px;
+        	width: 50px;
         	height: 100%;
         	right: 0;
         	bottom: 0;

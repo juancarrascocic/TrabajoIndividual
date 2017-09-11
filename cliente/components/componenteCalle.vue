@@ -42,15 +42,14 @@
 	.componenteCalleContainer{
 		background-color: white;
 		width: 100%;
-		height: 700px;
 			}
 	.windowContent{
 		margin-top: 25px;
 		overflow: auto;
-		height: 95%;
+		height: 97%;
 	}
 	.upperBar{
-		height: 25px;
+		height: 3%;
 		position: fixed;
 		width: 100%;
 		background-color: red;

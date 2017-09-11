@@ -1,42 +1,67 @@
 <template>
 	<div id="Detail" class="container-fluid">
-		<div id ="FormularioDocumentos" class="mx-auto" style="width: 45%">
-			<center>
-				<div class="form-group">
-					<button :disabled="this.isEditable" id="enableEditButton" class="btn btn-primary" v-on:click="buttonEnableEdit">Modificar</button>
-					<button  id="cancelarButton" class="btn btn-primary" v-on:click="buttonCancelar">Cancelar</button>
 
+		<div id="myModal" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Detalle: Calles</h4>
+						<button type="button" class="close" data-dismiss="modal" v-on:click= "buttonCancelar" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+
+						<div id ="FormularioDocumentos" class="mx-auto" style="width: 45%">
+							<center>
+								<div class="form-group">
+									<button :disabled="this.isEditable" id="enableEditButton" class="btn btn-primary" v-on:click="buttonEnableEdit">Modificar</button>
+									<button  id="cancelarButton" class="btn btn-primary" v-on:click="buttonCancelar">Cancelar</button>
+
+								</div>
+							</center>
+							<div class="form-group">
+								<label for="Nombre">Nombre:</label>
+								<input :disabled="!isEditable" class="form-control" v-model="calle.Nombre" type="text" id="NombreInput" placeholder="Nombre"></input>
+							</div>
+							<div class="form-group">
+								<label>Coordenada X:</label>
+								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaX" id="CoorXInput" placeholder=""></input>
+							</div>
+							<div class="form-group row">
+								<div class="col">
+									<label>Coordenada Y:</label>
+
+									<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaY" id="CoorYInput" ></input>
+
+								</div>
+							</div>
+							<div class="checkbox">
+								<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="calle.Circulable" id="circulableInput" >Circulable</label>
+							</div>
+
+							<div class="form-group row" v-if="this.calle.Circulable">
+							<label>Número de carriles:</label>
+								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.NumeroCarriles" id="CarrilesInput" placeholder=""></input>
+								<label>Accidentes mensuales:</label>
+								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.AccidentesMensuales" id="AccidentesInput" placeholder=""></input>
+							</div>
+							<center>
+								<div class="form-group">
+									<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-primary" v-on:click="buttonAccept">Aceptar</button>
+									<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-primary" v-on:click="buttonBorrar">Borrar</button>
+								</div>
+							</center>
+
+						</div>
+
+
+
+					</div>
 				</div>
-			</center>
-			<div class="form-group">
-				<label for="Nombre">Nombre:</label>
-				<input :disabled="!isEditable" class="form-control" v-model="calle.Nombre" type="text" id="NombreInput" placeholder="Nombre"></input>
 			</div>
-			<div class="form-group">
-				<label>Coordenada X:</label>
-				<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaX" id="CoorXInput" placeholder=""></input>
-			</div>
-			<div class="form-group row">
-				<div class="col">
-					<label>Coordenada Y:</label>
-					
-					<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaY" id="CoorYInput" ></input>
-					
-				</div>
-			</div>
-			<div class="checkbox">
-				<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="calle.Circulable" id="circulableInput" >Circulable</label>
-			</div>
-			
-		<center>
-			<div class="form-group">
-				<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-primary" v-on:click="buttonAccept">Aceptar</button>
-				<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-primary" v-on:click="buttonBorrar">Borrar</button>
-			</div>
-		</center>
+		</div>
+
 
 	</div>
-</div>
 </template>
 
 <script>
@@ -276,6 +301,7 @@
 			
 		}, 
 		mounted(){
+			$("#myModal").modal('show');
 			if(this.state == constantes.STATE_UPDATE){
 				this.makeGetRequest();
 			}

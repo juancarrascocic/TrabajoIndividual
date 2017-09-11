@@ -1,6 +1,6 @@
 <template>
 	<div class="rootContainer">
-		<taskBar @minimizeAll ="minimizeAll" @changeTopWindow = "changeTopWindow" :pestañasAbiertas="pestañasAbiertas"></taskBar>
+		<taskBar class= "taskBar" @minimizeAll ="minimizeAll" @changeTopWindow = "changeTopWindow" :pestañasAbiertas="pestañasAbiertas"></taskBar>
 		<img src="https://images.vexels.com/media/users/3/127711/isolated/preview/384e0b3361d99d9c370b4037115324b9-flat-vintage-car-icon-by-vexels.png"></img>
 		<component v-show="!allMinimized" @closeTab="closeTab" v-for="item in pestañasAbiertas" :is="item" class="tabWindow" :class="changeTopWindowClass(item)"></component>
 
@@ -65,11 +65,16 @@
 	}
 	.tabWindow{
 		top:0;
+		height:95%;
 		position: absolute;
 	}
 	.currentWindow{
 		z-index: 1000;
 		top:0;
+		height: 95%;
+	}
+	.taskBar{
+		height:5%;
 	}
 	.notCurrentWindow{
 		z-index: 100;
@@ -78,8 +83,15 @@
 	img {
 		display: block;
 		margin: 0 auto;
+		vertical-align: middle;
 	}
 	.bodyClass{
 		overflow: hidden;
+		z-index: 0;	
+		background-color: #eccccf;
+	}
+	.modal-backdrop.show{
+		z-index: -1;
+		opacity: 0;
 	}
 </style>
