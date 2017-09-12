@@ -1,7 +1,7 @@
 <template>
 	<div class="componenteSemaforoContainer">
 		<div class="upperBar">
-			<p class="windowCaption">Calles</p>
+			<p class="windowCaption">Semaforos</p>
 			<i class="fa fa-window-minimize buttonMinimize" aria-hidden="true" ></i>
 			<i class="fa fa-window-maximize buttonMaximize" aria-hidden="true"></i>
 			<i class="fa fa-times buttonClose" aria-hidden="true" v-on:click="closeTab"></i>

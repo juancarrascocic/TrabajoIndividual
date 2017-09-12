@@ -22,8 +22,6 @@
 						<td>{{item.CoordenadaX}}</td>
 						<td>{{item.CoordenadaY}}</td>
 						<td><input disabled ="true" type="checkbox" name="vehicle"  v-model="item.Circulable"></td>
-
-
 					</tr>
 					<div id="detail-tr" v-if="item.Id == elegido">
 						<div colspan="6">

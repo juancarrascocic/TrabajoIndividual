@@ -1,59 +1,62 @@
 <template>
 	<div id="Detail" class="container-fluid">
 
-		<div id="myModal" class="modal">
+		<div id="myModalSemaforos" class="modal">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Detalle: Semáforo</h4>
-						<button type="button" class="close" data-dismiss="modal" v-on:click= "buttonCancelar" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
+				<div class="upperBar">
+					<p class="windowCaption">Semaforos</p>
+					<i class="fa fa-window-minimize buttonMinimize" aria-hidden="true" ></i>
+					<i class="fa fa-window-maximize buttonMaximize" aria-hidden="true"></i>
+					<i class="fa fa-times buttonClose" aria-hidden="true" v-on:click= "buttonCancelar"></i>
+				</div> 
+				<div class="modal-body">
 
-						<div id ="FormularioDocumentos" class="mx-auto" style="width: 45%">
-							<center>
-								<div class="form-group">
-									<button :disabled="this.isEditable" id="enableEditButton" class="btn btn-primary" v-on:click="buttonEnableEdit">Modificar</button>
-									<button  id="cancelarButton" class="btn btn-default" v-on:click="buttonCancelar">Cancelar</button>
-
-								</div>
-							</center>
+					<div id ="FormularioDocumentos" class="mx-auto" style="width: 45%">
+						<center>
 							<div class="form-group">
-								<label for="Nombre">Calle:</label>
-								<input :disabled="!isEditable" class="form-control" v-model="semaforo.Calle" type="text" id="NombreInput" placeholder="Nombre"></input>
-							</div>
-							<div class="form-group">
-								<label>Tiempo verde:</label>
-								<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoVerde" id="CoorXInput" placeholder=""></input>
-							</div>
-							<div class="form-group row">
-								<div class="col">
-									<label>Tiempo rojo:</label>
-									<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoRojo" id="CoorYInput" ></input>
+								<button :disabled="this.isEditable" id="enableEditButton" class="btn btn-primary" v-on:click="buttonEnableEdit">Modificar</button>
+								<button  id="cancelarButton" class="btn btn-default" v-on:click="buttonCancelar">Cancelar</button>
 
-								</div>
 							</div>
-							<div class="checkbox">
-								<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="semaforo.PasoPeatones" id="circulableInput" >Paso de peatones</label>
-							</div>
-							<center>
-								<div class="form-group">
-									<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-success" v-on:click="buttonAccept">Aceptar</button>
-									<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-danger" v-on:click="buttonBorrar">Borrar</button>
-								</div>
-							</center>
-
+						</center>
+						<div class="form-group">
+							<label for="Nombre">Calle:</label>
+							<select :disabled="!isEditable" class="form-control" v-model="semaforo.Calle" type="text" id="NombreInput" placeholder="Nombre">
+								<option v-for="item in this.comboCalles" :value="item">{{item}}</option>
+							</select>
 						</div>
+						<div class="form-group">
+							<label>Tiempo verde:</label>
+							<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoVerde" id="CoorXInput" placeholder=""></input>
+						</div>
+						<div class="form-group row">
+							<div class="col">
+								<label>Tiempo rojo:</label>
+								<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoRojo" id="CoorYInput" ></input>
 
-
+							</div>
+						</div>
+						<div class="checkbox">
+							<label>	<input :disabled="!isEditable" class="checkbox" type="checkbox" v-model="semaforo.PasoPeatones" id="circulableInput" >Paso de peatones</label>
+						</div>
+						<center>
+							<div class="form-group">
+								<button  id="acceptButton" :disabled="this.computeAcceptButton" class="btn btn-success" v-on:click="buttonAccept">Aceptar</button>
+								<button  id="borrarButton" :disabled="this.computeDeleteButton" class="btn btn-danger" v-on:click="buttonBorrar">Borrar</button>
+							</div>
+						</center>
 
 					</div>
+
+
+
 				</div>
 			</div>
 		</div>
-
-
 	</div>
+
+
+</div>
 </template>
 
 <script>
@@ -70,7 +73,9 @@
 				},
 				isEditable:false,
 				menuChoice : "Semaforos",
-				estaVacio : false
+				estaVacio : false,
+				comboCalles:[],
+				currentIdData: ""
 
 			}
 		},
@@ -136,7 +141,7 @@
 				if(confirm("¿Está seguro de que quiere borrar?")){
 					//TODO: Peticion AJAX
 					$.ajax({
-						url:constantes.BASE_URL + this.menuChoice + "/" + this.currentId,
+						url:constantes.BASE_URL + this.menuChoice + "/" + this.currentIdData,
 						method: "DELETE"
 					})
 					.done(this.borradoHandler)
@@ -159,15 +164,15 @@
 					if(this.semaforo.Calle===""){
 						errores+="El valor de Calle está vacío. \n";
 					}
-					if(this.semaforo.TiempoVerde===""){
+					if(this.semaforo.TiempoVerde===null){
 						errores+="El valor de Tiempo verde está vacío. \n";
 					}
-					if(this.semaforo.TiempoRojo === "")
+					if(this.semaforo.TiempoRojo ===null)
 					{
 						errores+="El valor de Tiempo rojo está vacío. \n";
 					}
 					if(errores != ""){
-						alert("Hay campos no rellenados. No se puede crear el objeto:\n" + errores);
+						alert("Hay campos incorrectos. No se puede crear el objeto:\n" + errores);
 					}
 					else{
 						$.ajax({url:constantes.BASE_URL + this.menuChoice,
@@ -184,7 +189,7 @@
 				else if(this.state == constantes.STATE_UPDATE){
 					// TODO: Se hace un PUT con el objeto
 
-					$.ajax({url:constantes.BASE_URL + this.menuChoice + "/" + this.currentId,
+					$.ajax({url:constantes.BASE_URL + this.menuChoice + "/" + this.currentIdData,
 						method:"PUT",
 						data: this.semaforo})
 					.done(this.putSubmitData)
@@ -197,6 +202,21 @@
 				// TODO: Se fuerza un get en el maestro y se cierra el detail.
 				// Podemos llamar al metodo buttonCancelar.
 			},
+			getComboCalles: function(){
+				$.ajax({
+					url: constantes.BASE_URL + "Calle",
+					method: "GET"
+				})
+				.done(this.afterComboHandler)
+			},
+			afterComboHandler: function(datos){
+				var _this = this;
+				datos.forEach(function(element){
+					if(!_this.comboCalles.includes(element.Nombre)){
+						_this.comboCalles.push(element.Nombre);
+					}
+				});
+			},
 			putSubmitData(){
 				alert("Elemento modificado");
 				this.previousSemaforo = $.extend({}, this.semaforo);
@@ -205,7 +225,7 @@
 			}, 	
 			makeGetRequest(){
 				$.ajax({
-					url: constantes.BASE_URL + this.menuChoice + "/" + this.currentId,
+					url: constantes.BASE_URL + this.menuChoice + "/" + this.currentIdData,
 					method: "GET"
 				})
 				.done(this.submitGetRequest)
@@ -218,8 +238,8 @@
 					this.semaforo = {};
 					this.currentId = "";
 					this.semaforo.Calle = "";
-					this.semaforo.TiempoVerde = "";
-					this.semaforo.TiempoRojo = "";
+					this.semaforo.TiempoVerde = null;
+					this.semaforo.TiempoRojo = null;
 					this.semaforo.PasoPeatones = false;
 
 
@@ -227,7 +247,7 @@
 				}
 			},
 			submitGetRequest(datos){
-				this.currentId = datos.Id;
+				this.currentIdData = datos.Id;
 				this.semaforo = datos; 	
 			},
 			/*parseTipo: function(array){
@@ -253,15 +273,17 @@
 			},*/
 			makeNewDetail: function(){
 				this.makeEmptyData();
-				this.currentId = "";
+				this.currentIdData = "";
 				this.state = constantes.STATE_NEW;
 				this.isEditable = true;
 			},
 			
 		}, 
 		mounted(){
-			$("#myModal").modal('show');
+			$("#myModalSemaforos").modal('show');
+			this.getComboCalles();
 			if(this.state == constantes.STATE_UPDATE){
+				this.currentIdData = this.currentId;
 				this.makeGetRequest();
 			}
 			else if(this.state == constantes.STATE_NEW){
@@ -269,6 +291,9 @@
 				this.estaVacio = true;
 				this.isEditable = true;
 			}
+			$('.modal-dialog').draggable({
+				handle: ".upperBar"
+			});
 		},
 		updated(){
 		/*	if(this.state == constantes.STATE_NEW){
@@ -280,4 +305,50 @@
 
 <style>
 
+	.upperBar{
+		height: 25px;
+		position: fixed;
+		z-index: 9999;
+		width: 100%;
+		background-color: red;
+	}
+	.windowCaption{
+		color: white;
+		font-weight: bold;
+		margin-left: 5px;
+	}
+	.buttonClose{
+		height: 25px;
+		width: 25px;
+		right: 0;
+		top: 4px;
+		float: right;
+		position: absolute;
+	}
+	.buttonMaximize{
+		height: 25px;
+		width: 25px;
+		right:0;
+		margin-right: 30px;
+		top: 4px;
+		float: right;
+		position: absolute;
+	}
+	.buttonMinimize{
+		height: 25px;
+		width: 25px;
+		right:0;
+		margin-right: 60px;
+		top: 4px;
+		float: right;
+		position: absolute;
+	}
+	.modal-body{
+		background-color: #fff;
+		padding-top: 40px;
+		height: 97%;
+	}
+	.modal-dialog{
+		border:solid;
+	}
 </style>

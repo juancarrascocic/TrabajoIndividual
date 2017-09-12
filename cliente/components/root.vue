@@ -2,7 +2,7 @@
 	<div class="rootContainer">
 		<taskBar class= "taskBar" @minimizeAll ="minimizeAll" @changeTopWindow = "changeTopWindow" :pestañasAbiertas="pestañasAbiertas"></taskBar>
 		<img src="https://images.vexels.com/media/users/3/127711/isolated/preview/384e0b3361d99d9c370b4037115324b9-flat-vintage-car-icon-by-vexels.png"></img>
-		<component v-show="!allMinimized" @closeTab="closeTab" v-for="item in pestañasAbiertas" :is="item" class="tabWindow" :class="changeTopWindowClass(item)"></component>
+		<component v-show="!allMinimized" @closeTab="closeTab" v-for="item in pestañasAbiertas" :is="item" class="tabWindow" :class="changeTopWindowClass(item)" key="item"></component>
 
 		
 	</div>
