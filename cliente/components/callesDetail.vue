@@ -337,7 +337,7 @@
 		position: fixed;
 		z-index: 9999;
 		width: 100%;
-		background-color: red;
+		background-color: #bed1d8;
 	}
 	.windowCaption{
 		color: white;

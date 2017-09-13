@@ -81,13 +81,15 @@
 		top:0;
 	}
 	img {
-		display: block;
+		display: inline-block;
 		margin: 0 auto;
+		margin-top: 15%;
 		vertical-align: middle;
 	}
 	.bodyClass{
 		overflow: hidden;
 		z-index: 0;	
+		text-align: center;
 		background-color: #eccccf;
 	}
 	.modal-backdrop.show{

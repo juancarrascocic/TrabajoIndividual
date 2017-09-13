@@ -50,5 +50,7 @@ namespace formulario.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<KeepAlive> KeepAlives { get; set; }
     }
 }

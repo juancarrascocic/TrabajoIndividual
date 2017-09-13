@@ -52,7 +52,7 @@
 		height: 3%;
 		position: fixed;
 		width: 100%;
-		background-color: red;
+		background-color: #bed1d8;
 	}
 	.buttonClose{
 		height: 25px;

@@ -271,11 +271,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\KeepAlivesController.cs" />
     <Compile Include="Controllers\SemaforosController.cs" />
     <Compile Include="Controllers\PerfilesUsuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CalleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="KeepAlive.cs" />
     <Compile Include="Semaforo.cs" />
     <Compile Include="PerfilesUsuario.cs" />
     <Compile Include="Calle.cs" />
