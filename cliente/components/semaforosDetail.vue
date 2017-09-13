@@ -123,10 +123,7 @@
 				}
 			},
 			computeDeleteButton: function(){
-				if(!this.isEditable){
-					return true;
-				}
-				else if(this.state == constantes.STATE_UPDATE){
+				if(this.state == constantes.STATE_UPDATE){
 					return false;
 				}
 				else {return true};
