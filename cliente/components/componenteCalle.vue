@@ -7,7 +7,7 @@
 			<i class="fa fa-times buttonClose" aria-hidden="true" v-on:click="closeTab"></i>
 		</div>
 		<div class="windowContent">
-		<callesMaster></callesMaster>
+			<callesMaster></callesMaster>
 		</div>
 	</div>	
 </template>
@@ -42,11 +42,12 @@
 	.componenteCalleContainer{
 		background-color: white;
 		width: 100%;
-			}
+	}
 	.windowContent{
 		margin-top: 25px;
 		overflow: auto;
 		height: 97%;
+		text-align: left;
 	}
 	.upperBar{
 		height: 3%;
@@ -82,6 +83,7 @@
 	}
 	.windowCaption{
 		color: white;
+		text-align: left;
 		font-weight: bold;
 		margin-left: 5px;
 	}

@@ -137,6 +137,7 @@
 	.windowCaption{
 		color: white;
 		font-weight: bold;
+		text-align: left;
 		margin-left: 5px;
 	}
 	.buttonClose{

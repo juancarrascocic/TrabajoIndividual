@@ -83,7 +83,7 @@
 	img {
 		display: inline-block;
 		margin: 0 auto;
-		margin-top: 15%;
+		margin-top: 10%;
 		vertical-align: middle;
 	}
 	.bodyClass{

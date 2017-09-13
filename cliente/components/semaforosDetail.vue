@@ -316,6 +316,8 @@
 		color: white;
 		font-weight: bold;
 		margin-left: 5px;
+		text-align: left;
+
 	}
 	.buttonClose{
 		height: 25px;

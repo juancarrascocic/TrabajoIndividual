@@ -152,6 +152,9 @@
 	#detail-tr:hover{
 		background-color: white;
 	}
+	td{
+		text-align: left;
+	}
 
 
 </style>
