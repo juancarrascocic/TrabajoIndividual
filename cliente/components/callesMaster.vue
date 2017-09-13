@@ -7,8 +7,8 @@
 					<tr>
 						<th>#</th>
 						<th>Nombre</th>
-						<th>Coordenada X</th>
-						<th>Coordenada Y</th>
+						<th>Latitud (º)</th>
+						<th>Longitud (º)</th>
 						<th>Circulable</th>
 						<th> <i class="fa fa-user-plus" aria-hidden="true" v-on:click="getNewDetail()"></i> </a></th>
 					</tr>

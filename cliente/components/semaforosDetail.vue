@@ -26,12 +26,12 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Tiempo verde:</label>
+							<label>Tiempo verde (segundos):</label>
 							<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoVerde" id="CoorXInput" placeholder=""></input>
 						</div>
 						<div class="form-group row">
 							<div class="col">
-								<label>Tiempo rojo:</label>
+								<label>Tiempo rojo(segundos):</label>
 								<input :disabled="!isEditable" class="form-control" type="number" v-model="semaforo.TiempoRojo" id="CoorYInput" ></input>
 
 							</div>
@@ -209,7 +209,7 @@
 			afterComboHandler: function(datos){
 				var _this = this;
 				datos.forEach(function(element){
-					if(!_this.comboCalles.includes(element.Nombre)){
+					if(!_this.comboCalles.includes(element.Nombre) && element.Circulable){
 						_this.comboCalles.push(element.Nombre);
 					}
 				});

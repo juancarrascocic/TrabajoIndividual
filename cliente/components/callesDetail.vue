@@ -24,12 +24,12 @@
 							<input :disabled="!isEditable" class="form-control" v-model="calle.Nombre" type="text" id="NombreInput" placeholder="Nombre"></input>
 						</div>
 						<div class="form-group">
-							<label>Coordenada X:</label>
+							<label>Latitud (º):</label>
 							<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaX" id="CoorXInput" placeholder=""></input>
 						</div>
 						<div class="form-group row">
 							<div class="col">
-								<label>Coordenada Y:</label>
+								<label>Longitud (º):</label>
 
 								<input :disabled="!isEditable" class="form-control" type="number" v-model="calle.CoordenadaY" id="CoorYInput" ></input>
 

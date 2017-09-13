@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="barContainer">
-			<button class="startButton" v-on:click="this.hoverMenu"><i class="fa fa-bars" aria-hidden="true" ></i>START</button>
+			<button class="startButton" v-on:click="this.hoverMenu"><i class="fa fa-bars" aria-hidden="true" ></i> START</button>
 			<div class="tabContainer">
 				<div class="pestanya" v-for="item in pestañasAbiertas" v-on:click="changeTopWindow(item)">
 					<p class="textoPestanya">{{item}}</p>

@@ -7,8 +7,8 @@
 					<tr>
 						<th>#</th>
 						<th>Calle</th>
-						<th>Tiempo verde</th>
-						<th>Tiempo rojo</th>
+						<th>Tiempo verde (segundos)</th>
+						<th>Tiempo rojo (segundos)</th>
 						<th>Paso de peatones</th>
 						<th> <i class="fa fa-user-plus" aria-hidden="true" v-on:click="getNewDetail()"></i> </a></th>
 					</tr>
